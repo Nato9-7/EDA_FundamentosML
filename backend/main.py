@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
-import numpy as np
+import pandas as pd  # <-- necesario para usar DataFrame
 
 app = FastAPI()
 
-# Cargar modelos
-clf_model = joblib.load("models/clasificacion/decision_tree_classifier_model.pkl")
-reg_model = joblib.load("models/regresion/decision_tree_regressor_model.pkl")
+# Cargar modelos ya entrenados
+clf_model = joblib.load("models/clasificacion/random_forest.pkl")
+reg_model = joblib.load("models/regresion/mejor_random_forest.pkl")
 
 # Modelo de entrada para clasificación
 class ClasificacionInput(BaseModel):
@@ -30,27 +30,16 @@ class RegresionInput(BaseModel):
     PrimarySMG: float
     PrimaryPistol: float
 
+# Endpoint clasificación (victoria o derrota)
 @app.post("/predecir_clasificacion")
 def predecir_clasificacion(data: ClasificacionInput):
-    X = np.array([[data.RoundKills,
-                   data.TeamStartingEquipmentValue,
-                   data.PrimarySniperRifle,
-                   data.RLethalGrenadesThrown,
-                   data.RNonLethalGrenadesThrown,
-                   data.PrimaryHeavy,
-                   data.PrimarySMG,
-                   data.PrimaryPistol]])
-    pred = clf_model.predict(X)
+    input_df = pd.DataFrame([data.dict()])  # Convertir input a DataFrame
+    pred = clf_model.predict(input_df)
     return {"ganara_partida": bool(pred[0])}
 
+# Endpoint regresión (kills estimados)
 @app.post("/predecir_regresion")
 def predecir_regresion(data: RegresionInput):
-    X = np.array([[data.TeamStartingEquipmentValue,
-                   data.PrimarySniperRifle,
-                   data.RLethalGrenadesThrown,
-                   data.RNonLethalGrenadesThrown,
-                   data.PrimaryHeavy,
-                   data.PrimarySMG,
-                   data.PrimaryPistol]])
-    pred = reg_model.predict(X)
-    return {"kills_estimados": float(pred[0])} 
+    input_df = pd.DataFrame([data.dict()])  # Convertir input a DataFrame
+    pred = reg_model.predict(input_df)
+    return {"kills_estimados": float(pred[0])}
