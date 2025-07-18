@@ -1,0 +1,79 @@
+.volume-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.volume-button {
+  background-color: #4C5844;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 0;
+  box-shadow: 3px 3px 9px rgb(0, 0, 0);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-button:hover {
+  background-color: #5a6b52;
+  border-color: #000000;
+}
+
+.volume-slider-container {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background-color: #4C5844;
+  border: 1px solid #ffffff;
+  padding: 15px;
+  border-radius: 0;
+  box-shadow: 3px 3px 9px rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.volume-slider {
+  width: 100px;
+  height: 6px;
+  background: #1c2b1a;
+  outline: none;
+  border-radius: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  cursor: pointer;
+  border-radius: 0;
+  border: none;
+}
+
+.volume-value {
+  font-size: 14px;
+  color: #ffffff;
+  font-family: 'VT323', monospace;
+} 

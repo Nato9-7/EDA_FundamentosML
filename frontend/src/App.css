@@ -1,0 +1,452 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('/background.jpg'); /* Cambiar a background.jpg */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'VT323', monospace;
+  color: #ffffff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  padding: 40px;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  width: 300px;
+  margin: 0;
+}
+
+.menu li {
+  padding: 8px 0;
+  text-align: left;
+  cursor: pointer;
+  font-size: 24px;
+  transition: color 0.3s;
+  margin: 2px 0;
+}
+
+.menu li:hover {
+  color: rgb(231, 223, 223);
+}
+
+/* Control de volumen */
+.volume-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.volume-button {
+  background-color: #4C5844;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 0;
+  box-shadow: 3px 3px 9px rgb(0, 0, 0);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-button:hover {
+  background-color: #5a6b52;
+  border-color: #000000;
+}
+
+.volume-slider-container {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  background-color: #4C5844;
+  border: 1px solid #ffffff;
+  padding: 15px;
+  border-radius: 0;
+  box-shadow: 3px 3px 9px rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.volume-slider {
+  width: 100px;
+  height: 6px;
+  background: #1c2b1a;
+  outline: none;
+  border-radius: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  cursor: pointer;
+  border-radius: 0;
+  border: none;
+}
+
+.volume-value {
+  font-size: 14px;
+  color: #ffffff;
+  font-family: 'VT323', monospace;
+}
+
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.form-wrapper {
+  padding: 20px;
+  width: fit-content;
+  background-color: #4C5844;
+  border: #ffffff 1px solid;
+  box-shadow: 0 0 20px rgba(182, 255, 0, 0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+  cursor: default;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 10px;
+}
+
+.form-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.close-button {
+  background-color: #4C5844;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-family: 'VT323', monospace;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.close-button:hover {
+  background-color: #ffffff;
+  color: #4C5844;
+}
+
+/* Estilos para el formulario de ML */
+.ml-predictor-form {
+  color: #ffffff;
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+}
+
+.cs-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 600px;
+}
+
+/* Grid de 2 columnas para los formularios */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 16px;
+  color: #b4f0b4;
+  font-weight: bold;
+}
+
+.cs-input {
+  background-color: #1c2b1a;
+  color: #b4f0b4;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #4C5844;
+  box-shadow: inset 0 0 5px #000;
+  outline: none;
+  border-radius: 0;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.cs-input:hover {
+  border-color: #000000;
+  box-shadow: 0 0 6px #000000;
+}
+
+.cs-input:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.cs-button {
+  background-color: #4C5844;
+  border: 1px solid #797c7621;
+  border-radius: 0;
+  color: #ffffff;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-family: 'VT323', monospace;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 3px 3px 9px rgb(0, 0, 0);
+  min-width: 150px;
+}
+
+.cs-button:hover {
+  border: #000000 1.3px solid;
+  color: white;
+  background-color: #5a6b52;
+}
+
+.cs-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Estilos para los resultados */
+.resultado-prediccion {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #1c2b1a;
+  border: 1px solid #4C5844;
+  box-shadow: inset 0 0 10px #000;
+}
+
+.resultado-prediccion h3 {
+  margin: 0 0 15px 0;
+  color: #b4f0b4;
+  font-size: 20px;
+  text-align: center;
+}
+
+.prediction-result {
+  text-align: center;
+}
+
+.result {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 0;
+}
+
+.result.victory {
+  color: #4CAF50;
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid #4CAF50;
+}
+
+.result.defeat {
+  color: #f44336;
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 1px solid #f44336;
+}
+
+.result.kills-prediction {
+  color: #FF9800;
+  background-color: rgba(255, 152, 0, 0.1);
+  border: 1px solid #FF9800;
+}
+
+.probability {
+  font-size: 16px;
+  color: #ffffff;
+  margin: 10px 0;
+}
+
+.error-message {
+  color: #f44336;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 1px solid #f44336;
+}
+
+.new-game-form {
+  background:#4C5844;
+  border: 0.1px solid #ffffff27;
+  padding: 30px;
+  color: #ffffff;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
+  box-shadow: 4px 4px 4px rgb(0, 0, 0);
+}
+
+.new-game-form input {
+  padding: 5px;
+  font-size: 18px;
+  background-color: #222;
+  color: #ffffff;
+  border: none;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: right;  
+  gap: 20px;                
+  margin-top: 20px; 
+  margin-right: -14px;        
+}
+
+.form-buttons button {
+  background-color: #4C5844;
+  border: 1px solid #797c7621;
+  border-radius: 0;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: 'VT323', monospace;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 3px 3px 9px rgb(0, 0, 0);
+}
+
+.form-buttons button:hover {
+  border: #000000 1.3px solid;
+  color: white;
+}
+
+select {
+  background-color: #1c2b1a; /* Verde militar oscuro */
+  color: #b4f0b4;            /* Verde claro para texto */
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  padding: 6px 10px;
+  width: 100%;
+  max-width: 250px;
+
+  box-shadow: inset 0 0 5px #000; /* Sombra interna */
+  outline: none;
+  appearance: none; /* Quitar estilo por defecto del navegador */
+  border-radius: 0;  /* Estilo cuadrado */
+  cursor: pointer;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+select:hover {
+  border-color: #000000;     /* Cambio de borde al pasar el mouse */
+  box-shadow: 0 0 6px #000000;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .menu {
+    width: 250px;
+  }
+  
+  .menu li {
+    font-size: 20px;
+  }
+  
+  .cs-form {
+    min-width: 400px;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .volume-control {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .volume-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .menu-container {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-form {
+    min-width: 300px;
+  }
+  
+  .form-wrapper {
+    padding: 15px;
+    margin: 10px;
+  }
+}

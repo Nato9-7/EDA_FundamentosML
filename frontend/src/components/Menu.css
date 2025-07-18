@@ -1,0 +1,19 @@
+.menu {
+  list-style: none;
+  padding: 0;
+  width: 300px;
+  margin: 0;
+}
+
+.menu li {
+  padding: 8px 0;
+  text-align: left;
+  cursor: pointer;
+  font-size: 24px;
+  transition: color 0.3s;
+  margin: 2px 0;
+}
+
+.menu li:hover {
+  color: rgb(231, 223, 223);
+} 
